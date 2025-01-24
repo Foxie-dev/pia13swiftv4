@@ -8,6 +8,9 @@
 import SwiftUI
 import FirebaseCore
 
+
+
+
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -17,7 +20,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 }
 
-
 @main
 struct pia13swiftv4App: App {
     
@@ -25,7 +27,9 @@ struct pia13swiftv4App: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+           //ContentView()
+            TestaStorageView()
+          
         }
     }
 }

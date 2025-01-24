@@ -6,90 +6,40 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 import Firebase
 
 struct ContentView: View {
     
-    @State var todoadd = ""
+    @State var isLoggedin : Bool?
     
     var body: some View {
         VStack {
-            HStack {
-                TextField("TODO", text: $todoadd)
-                Button(action: {
-                    todosave()
-                }) {
-                    Text("ADD")
-                }
+            if isLoggedin == true {
+               // TodoView()
+                MainTabView()
+            }
+            if isLoggedin == false {
+                LoginView()
             }
         }
-        .padding()
         .onAppear() {
-            //fbtest()
-        }
-        .task {
-            //await fbtestload()
-            await todoload()
-        }
-    }
-    func todoload() async {
-        var ref: DatabaseReference!
-        
-        ref = Database.database().reference()
-        
-        do {
-            let tododata = try await ref.child("todo").getData()
-            print(tododata.childrenCount)
-            
-            for todoitem in tododata.children {
-                print("En todo sak")
-                let todosnap = todoitem as!DataSnapshot
-               // let todotitle = todosnap.child("title").value as? Sring
+            Auth.auth().addStateDidChangeListener { auth, user in
+                print("USER CHANGE")
                 
-                //print(todotitle)
+                if Auth.auth().currentUser == nil {
+                    isLoggedin = false
+                } else {
+                    isLoggedin = true
+                }
+                
             }
-            
-        } catch {
-            // Något gick fel
-            print("Nu blev det fel!!")
         }
     }
     
-    func todosave() {
-        var ref: DatabaseReference!
-        
-        ref = Database.database().reference()
-        
-        ref.child("todo").childByAutoId().child("title").setValue(todoadd)
-    }
     
-    func fbtestsave() {
-        var ref: DatabaseReference!
-        
-        ref = Database.database().reference()
-        
-        ref.child("fruit").setValue("orange")
-        
-    }
-    
-    func fbtestload() async {
-        var ref: DatabaseReference!
-        
-        ref = Database.database().reference()
-        
-        do {
-            let namndata = try await ref.child("namn").getData()
-            if let thename = namndata.value as? String {
-                print(thename)
-            }
-            
-        } catch {
-            // Något gick fel
-            print("Nu blev det fel!!")
-        }
-        
-        #Preview {
-            ContentView()
-        }
-    }
+}
+
+#Preview {
+    ContentView()
 }

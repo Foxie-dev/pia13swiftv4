@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct LoginView: View {
     
     @State var todofb = TodoFB()
@@ -25,11 +24,11 @@ struct LoginView: View {
             
             TextField("Email", text: $email)
             TextField("Password", text: $password)
-            
+
             Button(action: {
                 todofb.userLogin(email: email, password: password)
             }) {
-                Text("LOGIN")
+                Text("Login")
             }
             Button(action: {
                 todofb.userRegister(email: email, password: password)
@@ -40,6 +39,10 @@ struct LoginView: View {
         .padding()
     }
     
+    
+    
+}
+
 #Preview {
     LoginView()
 }

@@ -12,16 +12,15 @@ struct TodoView: View {
     @State var todofb = TodoFB()
     @State var todoadd = ""
     
-    
     var body: some View {
         VStack {
             
             Button(action: {
                 todofb.userLogout()
-                   }) {
+            }) {
                 Text("Logout")
             }
-                
+            
             HStack {
                 TextField("TODO", text: $todoadd)
                 Button(action: {
@@ -29,48 +28,39 @@ struct TodoView: View {
                 }) {
                     Text("ADD")
                 }
-                
-                List(todofb.todolist, id: \.) { todoitem in
-                    HStack {
-                        
+            }
+            
+            List(todofb.todolist, id: \.id) { todoitem in
+                HStack {
+                    VStack {
+                        Text(todoitem.title)
+                        Text("DASHBOARD")
+                    }
                     
-                        VStack {
-                            Text(todoitem.id)
-                            Text(todoitem.title)
-                        }
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            todofb.tododelete(todoitem: todoitem)
-                        }) {
-                            Text("DELETE")
-                        
-                            
+                    Spacer()
+                    
+                    Button(action: {
+                        todofb.tododelete(todoitem: todoitem)
+                    }) {
+                        Text("Delete")
                     }
                 }
             }
-            .padding()
-            .onAppear()
+            
+        }
+        .padding()
+        .onAppear() {
             //fbtest()
             
-        
+            
         }
         .task {
             //await fbtestload()
             await todofb.todoload()
         }
-    
-    
-    
-        
-        
-        
     }
     
-
-    }
-
+}
 
 #Preview {
     TodoView()
