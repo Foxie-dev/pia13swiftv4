@@ -16,31 +16,69 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            Text("LOGIN")
             
-            if todofb.loginerror != nil {
-                Text(todofb.loginerror!)
+            Image("Blackredcards")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 300, height: 300)
+                .clipShape(Circle())
+                .shadow(radius: 200)
+                .padding(.bottom, 8)
+            
+            Text("LOGIN")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding(.top)
+                .padding(.bottom, 16)
+            
+            if let error = todofb.loginerror {
+                Text(error)
+                    .foregroundColor(.red)
+                    .font(.subheadline)
+                    .padding(.bottom, 8)
             }
             
             TextField("Email", text: $email)
-            TextField("Password", text: $password)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(.none)
+                            .padding(.horizontal)
 
+                        SecureField("Password", text: $password)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.horizontal)
+                            .padding(.top, 8)
+
+                
+                // Login button
             Button(action: {
                 todofb.userLogin(email: email, password: password)
             }) {
                 Text("Login")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.black)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+                    .scaleEffect(1.0)
             }
-            Button(action: {
-                todofb.userRegister(email: email, password: password)
-            }) {
-                Text("Register")
+            .padding(.horizontal)
             }
-        }
-        .padding()
-    }
     
-    
-    
+        
+        // Register button
+                 Button(action: {
+                     todofb.userRegister(email: email, password: password)
+                 }) {
+                     Text("Register")
+                         .frame(maxWidth: .infinity)
+                         .padding()
+                         .background(Color.black)
+                         .foregroundColor(.white)
+                         .cornerRadius(8)
+                 }
+                 .padding(.horizontal)
+             }
+
 }
 
 #Preview {

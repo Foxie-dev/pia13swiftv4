@@ -25,19 +25,29 @@ struct MainTabView: View {
                     Label("Dashboard", systemImage: "house")
                 }
                 .tag(Tab.dashboard)
+                .background(LinearGradient(gradient: Gradient(colors: [.red.opacity(0.1), .white]), startPoint: .top, endPoint: .bottom))
+            
             
             ListView()
                  .tabItem {
                      Label("List", systemImage: "list.bullet")
                  }
                  .tag(Tab.list)
+                 .background(LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.1), .white]), startPoint: .top, endPoint: .bottom)) // Different background
+
+            
             
             ProfileView()
                  .tabItem {
                      Label("Profile", systemImage: "person")
                  }
                  .tag(Tab.profile)
+                    .background(LinearGradient(gradient: Gradient(colors: [.green.opacity(0.1), .white]), startPoint: .top, endPoint: .bottom)) // Different background
+            
         }//Tabview
+        
+        .accentColor(.red) // Matches the black-and-red theme
+                .background(Color.black.opacity(0.05).edgesIgnoringSafeArea(.all)) // Background for the entire TabView
     }
     
     

@@ -49,14 +49,15 @@ import FirebaseDatabase
         }
     }
     
+    
+    
     func todoload() async {
-        
-        let userid = Auth.auth().currentUser!.uid
-        
-        //let userid = "p7UeB2s3cdb6FET01Od51aMwYg22"
+        guard let userid = Auth.auth().currentUser?.uid else {
+            print("No authenticated user found!")
+            return
+        }
         
         var ref: DatabaseReference!
-
         ref = Database.database().reference()
         
         todolist = []
@@ -66,26 +67,24 @@ import FirebaseDatabase
             print(tododata.childrenCount)
             
             for todoitem in tododata.children {
-                let todosnap = todoitem as! DataSnapshot
-                
-                let tododict = todosnap.value as? [String: Any]
-                
-                
-                print(tododict!["title"])
-                
-                var faketodo = Todo()
-                faketodo.id = todosnap.key
-                faketodo.title = tododict!["title"] as! String
-                
-                todolist.append(faketodo)
-                
+                if let todosnap = todoitem as? DataSnapshot,
+                   let tododict = todosnap.value as? [String: Any],
+                   let title = tododict["title"] as? String {
+                    
+                    var faketodo = Todo()
+                    faketodo.id = todosnap.key
+                    faketodo.title = title
+                    todolist.append(faketodo)
+                } else {
+                    print("Invalid todo data")
+                }
             }
-            
         } catch {
-            // Något gick fel
-            print("Nu blev det fel!!!")
+            print("Failed to load todos: \(error.localizedDescription)")
         }
     }
+
+    //----------------------------------------------------
     
     func todosave(todoadd : String) {
         var ref: DatabaseReference!

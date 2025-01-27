@@ -12,6 +12,8 @@ struct TodoView: View {
     @State var todofb = TodoFB()
     @State var todoadd = ""
     
+    @State var showCamera = false
+    
     var body: some View {
         VStack {
             
@@ -23,6 +25,11 @@ struct TodoView: View {
             
             HStack {
                 TextField("TODO", text: $todoadd)
+                Button(action: {
+                    showCamera.toggle()
+                }) {
+                    Text("CAMERA")
+                }
                 Button(action: {
                     todofb.todosave(todoadd: todoadd)
                 }) {
@@ -57,6 +64,9 @@ struct TodoView: View {
         .task {
             //await fbtestload()
             await todofb.todoload()
+        }
+        .sheet(isPresented: $showCamera) {
+            TestaStorageView()
         }
     }
     
