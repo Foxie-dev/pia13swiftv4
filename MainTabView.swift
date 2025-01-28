@@ -46,7 +46,7 @@ struct MainTabView: View {
             
         }//Tabview
         
-        .accentColor(.red) // Matches the black-and-red theme
+        .accentColor(.black) // Matches the black-and-red theme
                 .background(Color.black.opacity(0.05).edgesIgnoringSafeArea(.all)) // Background for the entire TabView
     }
     
