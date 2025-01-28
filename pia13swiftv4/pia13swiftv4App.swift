@@ -27,9 +27,11 @@ struct pia13swiftv4App: App {
     
     var body: some Scene {
         WindowGroup {
-           ContentView()
+           //ContentView()
             //TestaStorageView()
                 //MainTabView()
+            itest2()
+            
           
         }
     }

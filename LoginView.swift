@@ -17,20 +17,33 @@ struct LoginView: View {
     var body: some View {
         VStack {
             
-            Image("Blackredcards")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 300, height: 300)
-                .clipShape(Circle())
-                .shadow(radius: 200)
-                .padding(.bottom, 8)
+        Spacer()
             
+            // App Logo
+            Image("swipper")
+                .resizable()
+                .scaledToFill() // Fyll hela rektangeln
+                .frame(width: 250, height: 230) // Minska höjden för att ge mer utrymme till texten
+                .clipShape(RoundedRectangle(cornerRadius: 36)) // Behåll rundade hörn
+                .shadow(color: .gray.opacity(0.4), radius: 30, x: 0, y: 4)
+                .padding(.bottom, 8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 36)
+                        .stroke(Color.gray, lineWidth: 2)
+                        .rotationEffect(.degrees(180)) // Rotera endast ramen
+                )
+            Spacer()
+
+
+
+            
+            // Login Title
             Text("LOGIN")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding(.top)
+                .font(.system(size: 32, weight: .bold, design: .rounded))
+                .foregroundColor(.black)
                 .padding(.bottom, 16)
             
+            // Error Message
             if let error = todofb.loginerror {
                 Text(error)
                     .foregroundColor(.red)
@@ -38,47 +51,80 @@ struct LoginView: View {
                     .padding(.bottom, 8)
             }
             
-            TextField("Email", text: $email)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .autocapitalization(.none)
-                            .padding(.horizontal)
-
-                        SecureField("Password", text: $password)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding(.horizontal)
-                            .padding(.top, 8)
-
+            // Email and Password Section
+            VStack(spacing: 16) {
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocapitalization(.none)
+                    .padding()
+                    .background(Color(UIColor.systemGray6))
+                    .cornerRadius(10)
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
                 
-                // Login button
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .background(Color(UIColor.systemGray6))
+                    .cornerRadius(10)
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 16)
+            .background(Color(UIColor.systemGray6).opacity(0.4))
+            .cornerRadius(16)
+            .shadow(radius: 5)
+            .padding(.horizontal)
+            
+            // Login Button
             Button(action: {
                 todofb.userLogin(email: email, password: password)
             }) {
                 Text("Login")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.black)
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.gray.opacity(0.9), Color.black]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
                     .foregroundColor(.white)
-                    .cornerRadius(8)
-                    .scaleEffect(1.0)
+                    .font(.system(size: 18, weight: .semibold, design: .rounded))
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
             }
             .padding(.horizontal)
-            }
-    
-        
-        // Register button
-                 Button(action: {
-                     todofb.userRegister(email: email, password: password)
-                 }) {
-                     Text("Register")
-                         .frame(maxWidth: .infinity)
-                         .padding()
-                         .background(Color.black)
-                         .foregroundColor(.white)
-                         .cornerRadius(8)
-                 }
-                 .padding(.horizontal)
-             }
+            .padding(.top, 16)
 
+            // Register Button
+            Button(action: {
+                todofb.userRegister(email: email, password: password)
+            }) {
+                Text("Register")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.gray.opacity(0.9), Color.black]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .foregroundColor(.white)
+                    .font(.system(size: 18, weight: .semibold, design: .rounded))
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+
+            }
+            .padding(.horizontal)
+            .padding(.top, 8)
+            
+            Spacer()
+        }
+        .background(Color.white)
+        .edgesIgnoringSafeArea(.all)
+    }
 }
 
 #Preview {
