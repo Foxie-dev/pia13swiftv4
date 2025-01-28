@@ -18,12 +18,13 @@ struct LoginView: View {
         VStack {
             
         Spacer()
+         Spacer()
             
             // App Logo
             Image("swipper")
                 .resizable()
-                .scaledToFill() // Fyll hela rektangeln
-                .frame(width: 250, height: 230) // Minska höjden för att ge mer utrymme till texten
+                .scaledToFit() // Fyll hela rektangeln
+                .frame(width: 200, height: 290) // Minska höjden för att ge mer utrymme till texten
                 .clipShape(RoundedRectangle(cornerRadius: 36)) // Behåll rundade hörn
                 .shadow(color: .gray.opacity(0.4), radius: 30, x: 0, y: 4)
                 .padding(.bottom, 8)

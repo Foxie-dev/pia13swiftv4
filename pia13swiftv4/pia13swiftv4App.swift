@@ -29,8 +29,8 @@ struct pia13swiftv4App: App {
         WindowGroup {
            //ContentView()
             //TestaStorageView()
-                //MainTabView()
-            itest2()
+                MainTabView()
+            //itest2()
             
           
         }

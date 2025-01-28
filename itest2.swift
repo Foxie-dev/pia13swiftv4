@@ -20,7 +20,7 @@ struct itest2: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("Image Gallery & Camera Upload")
+            Text("Gallery & Camera")
                 .font(.title)
                 .padding()
 
@@ -32,9 +32,6 @@ struct itest2: View {
                     .frame(width: 200, height: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .shadow(color: .gray.opacity(0.4), radius: 30, x: 0, y: 4) // Shadow with opacity
-            } else {
-                Text("No image loaded from Firebase")
-                    .foregroundColor(.gray)
             }
             
             Divider()
@@ -69,6 +66,8 @@ struct itest2: View {
                 .cornerRadius(12) // Rounded corners
                 .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2) // Shadow effect
 
+            Spacer()
+            
             // Button to open the camera
             Button(action: {
                 showCameraSheet = true
@@ -76,7 +75,7 @@ struct itest2: View {
                 Image(systemName: "camera.fill") // SF Symbol for camera
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 30, height: 30) // Icon size
+                    .frame(width: 100, height: 100) // Icon size
                     .foregroundColor(.white)
                     .padding()
                     .background(
@@ -86,7 +85,7 @@ struct itest2: View {
                             endPoint: .bottom
                         )
                     ) // Gradient background with opacity
-                    .cornerRadius(12) // Rounded corners
+                    .cornerRadius(52) // Rounded corners
                     .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2) // Shadow effect
             }
 
