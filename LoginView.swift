@@ -24,7 +24,7 @@ struct LoginView: View {
             Image("swipper")
                 .resizable()
                 .scaledToFit() // Fyll hela rektangeln
-                .frame(width: 200, height: 290) // Minska höjden för att ge mer utrymme till texten
+                .frame(width: 200, height: 250) // Minska höjden för att ge mer utrymme till texten
                 .clipShape(RoundedRectangle(cornerRadius: 36)) // Behåll rundade hörn
                 .shadow(color: .gray.opacity(0.4), radius: 30, x: 0, y: 4)
                 .padding(.bottom, 8)
@@ -77,6 +77,7 @@ struct LoginView: View {
             .padding(.horizontal)
             
             // Login Button
+                                       
             Button(action: {
                 todofb.userLogin(email: email, password: password)
             }) {
@@ -117,15 +118,23 @@ struct LoginView: View {
                     .cornerRadius(12)
                     .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
 
+                                           
             }
             .padding(.horizontal)
             .padding(.top, 8)
             
+
+                                       
+                                       
+                                       
             Spacer()
         }
         .background(Color.white)
         .edgesIgnoringSafeArea(.all)
     }
+       
+
+                               
 }
 
 #Preview {

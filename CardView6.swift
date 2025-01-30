@@ -38,7 +38,7 @@ struct CardView6: View {
               Button(action: loadNextBatch) {
                 Text("Load 20 more cards")
                   .font(.headline)
-                  .foregroundColor(.blue)
+                  .foregroundColor(.black)
                   .padding()
                   .background(Color.white.opacity(0.8))
                   .cornerRadius(10)
